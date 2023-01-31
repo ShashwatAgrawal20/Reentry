@@ -1,81 +1,45 @@
+import React, { useState } from "react";
 import styled from "styled-components";
-const ResourceCheckBoxes = () => {
+
+const resources = [
+  { id: 1, name: "Basic Needs" },
+  { id: 2, name: "Domestic Violence" },
+  { id: 3, name: "Food" },
+  { id: 4, name: "Education" },
+  { id: 5, name: "Employment" },
+  { id: 6, name: "Housing" },
+  { id: 7, name: "Medical" },
+  { id: 8, name: "Mental Health" },
+  { id: 9, name: "Transportation" },
+];
+
+const ResourceCheckBoxes = (props) => {
   return (
-    <div>
-      <CkBoxs>
-        <input
-          type="checkbox"
-          id="resources.id"
-          name="resources.name"
-          value="resources.id"
-        />
-        Basic Needs
-        <input
-          type="checkbox"
-          id="resources.id"
-          name="resources.name"
-          value="resources.id"
-        />
-        Domestic Violence
-        <input
-          type="checkbox"
-          id="resources.id"
-          name="resources.name"
-          value="resources.id"
-        />
-        Food
-        <input
-          type="checkbox"
-          id="resources.id"
-          name="resources.name"
-          value="resources.id"
-        />
-        Education
-        <input
-          type="checkbox"
-          id="resources.id"
-          name="resources.name"
-          value="resources.id"
-        />
-        Employment
-      </CkBoxs>
-      <CkBoxs>
-        <input
-          type="checkbox"
-          id="resources.id"
-          name="resources.name"
-          value="resources.id"
-        />
-        Housing
-        <input
-          type="checkbox"
-          id="resources.id"
-          name="resources.name"
-          value="resources.id"
-        />
-        Medical
-        <input
-          type="checkbox"
-          id="resources.id"
-          name="resources.name"
-          value="resources.id"
-        />
-        Mental Health
-        <input
-          type="checkbox"
-          id="resources.id"
-          name="resources.name"
-          value="resources.id"
-        />
-        Transportation
-      </CkBoxs>
-    </div>
+    <CheckboxContainer>
+      {resources.map((resource, index) => (
+        <div key={resource.id}>
+          <input
+            type="checkbox"
+            id={`resource-${resource.id}`}
+            onChange={props.onCheckboxChange}
+          />
+          {resource.name}
+        </div>
+      ))}
+    </CheckboxContainer>
   );
 };
 
-const CkBoxs = styled.div`
-  input {
-    margin: 30px 0 30px 30px;
+const CheckboxContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 100%;
+
+  div {
+    width: calc(33.33% - 10px);
+    margin: 10px;
   }
 `;
+
 export default ResourceCheckBoxes;

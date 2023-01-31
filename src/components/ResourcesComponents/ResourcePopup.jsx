@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import ResourceCheckBoxes from "../ResourceCheckBoxes";
 import {
@@ -12,6 +12,22 @@ import {
 } from "./styles/styledResourcePopup";
 
 export const ResourcePopup = (props) => {
+  const [selectedValues, setSelectedValues] = useState([]);
+
+  const handleCheckboxChange = (event) => {
+    const { id, checked } = event.target;
+    if (checked) {
+      setSelectedValues([...selectedValues, id]);
+    } else {
+      setSelectedValues(selectedValues.filter((value) => value !== id));
+    }
+  };
+
+  const handleSave = () => {
+    console.log(`Selected values: ${selectedValues}`);
+    // Add code to save the selected values
+  };
+
   return (
     <>
       {props.showModal === "open" && (
@@ -32,11 +48,11 @@ export const ResourcePopup = (props) => {
           <ResourcesCheckBoxes>
             <RPUHeading></RPUHeading>
             <Content>
-              <ResourceCheckBoxes />
+              <ResourceCheckBoxes onCheckboxChange={handleCheckboxChange} />
             </Content>
           </ResourcesCheckBoxes>
 
-          <button>Done</button>
+          <button onClick={handleSave}>Done</button>
         </Popup>
       )}
     </>
